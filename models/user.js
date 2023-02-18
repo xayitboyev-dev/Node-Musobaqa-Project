@@ -8,6 +8,10 @@ const userSchema = new Schema({
   phone: {
     type: String,
     required: true
+  },
+  queue: {
+    type: Array,
+    default: []
   }
 })
 

@@ -1,6 +1,6 @@
 const {Schema, model} = require("mongoose")
 
-const ustaSchema = new Schema({
+const workerSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -43,4 +43,4 @@ const ustaSchema = new Schema({
   }
 })
 
-exports = model("usta", ustaSchema)
+exports = model("worker", workerSchema)
