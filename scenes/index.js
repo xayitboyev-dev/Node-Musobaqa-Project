@@ -5,6 +5,7 @@ const stage = new Stage([
     require("./register/customer"),
     require("./register/worker"),
     require("./register/role"),
+    require("./main")
 ]);
 
 module.exports = stage;

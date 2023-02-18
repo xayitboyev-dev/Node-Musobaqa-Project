@@ -7,7 +7,10 @@ const auth = require("./middleware/auth");
 
 // bot.use(auth);
 bot.use(stage.middleware());
-bot.start(ctx => ctx.scene.enter("register:main"));
+bot.action(/^conf_(.+)$/, require("./actions/confirmRegister"));
+bot.action(/^canc_(.+)$/, require("./actions/cancelRegister"));
+bot.use(auth);
+bot.use((ctx) => ctx.scene.enter("main"));
 
 async function startBot() {
     try {

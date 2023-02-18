@@ -1,9 +1,11 @@
-const { Scenes: { BaseScene } } = require('telegraf');
+const { Markup, Scenes: { BaseScene } } = require('telegraf');
 const scene = new BaseScene('main');
-const { register } = require('../keyboards/button');
+const Category = require("../models/Category");
 
 scene.enter(async (ctx) => {
-    ctx.reply("Change Team botiga xush kelibsiz! \n\nBiz mijoz va ishchilarni online topishga yordam beramiz!", register);
+    const categories = await Category.find();
+    const keyboard = Markup.keyboard(categories.map((item) => [item.name])).resize();
+    ctx.reply("🔝 Asosiy menyu", keyboard);
 });
 
 module.exports = scene;
