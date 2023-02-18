@@ -1,8 +1,9 @@
 const { Scenes: { WizardScene } } = require("telegraf");
 const Category = require("../../models/category");
-const { Markup } = require("telegraf");
-const { skip } = require("../../keyboards/button");
-const { confirm } = require("../../keyboards/inline");
+const { Markup, Composer } = require("telegraf");
+const { skip, remove, phone } = require("../../keyboards/button");
+const { confirmation } = require("../../keyboards/inline");
+const sendAdmins = require("../../utils/sendToAdmins");
 
 const register = new WizardScene('register:worker',
     async (ctx) => {
@@ -15,7 +16,7 @@ const register = new WizardScene('register:worker',
         const category = await Category.findOne({ name: ctx.message?.text });
         if (category?.name) {
             ctx.wizard.state.role = category.name;
-            ctx.reply("Ismingizni kiriting:");
+            ctx.reply("Ismingizni kiriting:", remove);
             ctx.wizard.next();
         } else {
             ctx.reply("❗️ Iltimos quyida keltirilganlardan kiriting.");
@@ -23,27 +24,25 @@ const register = new WizardScene('register:worker',
     },
     async (ctx) => {
         ctx.wizard.state.name = ctx.message?.text;
-        ctx.reply("Telefon raqamingizni kiriting (+998):");
+        ctx.reply("Telefon raqamingizni kiriting (+998):", phone);
         ctx.wizard.next();
     },
     async (ctx) => {
-        let number = parseInt(ctx.message?.text).toString();
+        let number = ctx.message?.contact?.phone_number || (parseInt(ctx.message?.text).toString());
         if (number && (number.slice(0, 4) === "+998" || number.slice(0, 3) === "998")) {
-            ctx.wizard.state.phone = ctx.message?.text;
+            ctx.wizard.state.phone = number;
             ctx.reply("Ustaxonangiz nomini kiriting (ixtiyoriy):", skip);
             ctx.wizard.next();
-        } {
+        } else {
             ctx.reply("❗️ Iltimos telefon raqamni to'gri kiriting.");
         };
     },
     async (ctx) => {
-        if (ctx.message?.text) {
+        if (ctx.message?.text !== "➡️ Tashlab ketish") {
             ctx.wizard.state.officeName = ctx.message?.text;
-            ctx.reply("Ishxonangiz manzilini kiriting:");
-            ctx.wizard.next();
-        } else {
-            ctx.reply("❗️ Iltimos ustaxonangiz nomini to'gri kiriting.");
         };
+        ctx.reply("Ishxonangiz manzilini kiriting:", remove);
+        ctx.wizard.next();
     },
     async (ctx) => {
         if (ctx.message?.text) {
@@ -84,11 +83,25 @@ const register = new WizardScene('register:worker',
     async (ctx) => {
         if (ctx.message?.text) {
             ctx.wizard.state.timeToOne = ctx.message?.text;
-            ctx.reply(`Role: ${ctx.wizard.state.role}\nIsm: ${ctx.wizard.state.name}\nTelefon: ${ctx.wizard.state.role}\nUstaxona nomi: ${ctx.wizard.state.officeName}\nManzil: ${ctx.wizard.state.place}\nMo'ljal: ${ctx.wizard.state.targetPlace}\nIshni boshlash: ${ctx.wizard.state.startWork}\nIshni yakunlash: ${ctx.wizard.state.endWork}\nHarbir mijoz uchun vaqt: ${ctx.wizard.state.timeToOne}\n`, confirm);
+            ctx.wizard.state.result = `Role: ${ctx.wizard.state.role}\nIsm: ${ctx.wizard.state.name}\nTelefon: ${ctx.wizard.state.phone}${ctx.wizard.state.officeName ? "\nUstaxona nomi: " + ctx.wizard.state.officeName : ""}\nManzil: ${ctx.wizard.state.place}\nMo'ljal: ${ctx.wizard.state.targetPlace}\nIshni boshlash: ${ctx.wizard.state.startWork}\nIshni yakunlash: ${ctx.wizard.state.endWork}\nHarbir mijoz uchun vaqt: ${ctx.wizard.state.timeToOne}\n`;
+            ctx.reply(ctx.wizard.state.result, confirmation);
+            ctx.wizard.next();
         } else {
             ctx.reply("❗️ Iltimos to'gri kiriting.");
         };
-    }
+    },
+    Composer.action("confirm", (ctx) => {
+        sendAdmins(ctx.wizard.state.result,);
+    }),
+    Composer.action("cancel", (ctx) => {
+        ctx.wizard.state = {};
+        ctx.state.enter("register");
+    }),
+    Composer.action("confirm", (ctx) => {
+        sendAdmins(ctx.wizard.state.result,);
+    })
 );
+
+
 
 module.exports = register;

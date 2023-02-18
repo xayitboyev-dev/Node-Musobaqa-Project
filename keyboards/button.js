@@ -11,3 +11,9 @@ exports.role = Markup.keyboard([
 exports.skip = Markup.keyboard([
     ["➡️ Tashlab ketish"]
 ]).resize();
+
+exports.phone = Markup.keyboard([
+    Markup.button.contactRequest("📱 Raqamni yuborish")
+]).resize();
+
+exports.remove = Markup.removeKeyboard();
