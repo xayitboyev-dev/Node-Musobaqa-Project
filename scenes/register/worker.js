@@ -2,7 +2,7 @@ const { Scenes: { WizardScene } } = require("telegraf");
 const Category = require("../../models/Category");
 const Worker = require("../../models/Worker");
 const { Markup, Composer } = require("telegraf");
-const { skip, remove, phone } = require("../../keyboards/button");
+const { skip, remove, phone, location } = require("../../keyboards/button");
 const { confirmation, adminConfirmation } = require("../../keyboards/inline");
 const sendAdmins = require("../../utils/sendToAdmins");
 
@@ -49,7 +49,7 @@ const register = new WizardScene('register:worker',
     async (ctx) => {
         if (ctx.message?.text) {
             ctx.wizard.state.place = ctx.message?.text;
-            ctx.reply("Joylashuv yuboring:");
+            ctx.reply("Joylashuv yuboring:", location);
             ctx.wizard.next();
         } else {
             ctx.reply("❗️ Iltimos ishxonangiz manzilini to'gri kiriting.");
@@ -58,7 +58,7 @@ const register = new WizardScene('register:worker',
     async (ctx) => {
         if (ctx.message?.location) {
             ctx.wizard.state.location = { latitude: ctx.message?.location?.latitude, longitude: ctx.message?.location?.longitude };
-            ctx.reply("Ishxonangiz mo'ljalini kiriting:");
+            ctx.reply("Ishxonangiz mo'ljalini kiriting:", remove);
             ctx.wizard.next();
         } else {
             ctx.reply("❗️ Noto'g'ri joylashuv.");

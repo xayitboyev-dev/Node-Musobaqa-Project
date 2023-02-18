@@ -5,7 +5,7 @@ module.exports = async (ctx) => {
         const id = parseInt(ctx.match[1]);
         const updated = await Worker.findOneAndUpdate({ userId: id }, { confirmed: true });
         ctx.deleteMessage();
-        ctx.answerCbQuery("Successfully deleted", { show_alert: true });
+        ctx.answerCbQuery("Successfully confirmed", { show_alert: true });
         console.log(updated);
     } catch (error) {
         console.log(error);
