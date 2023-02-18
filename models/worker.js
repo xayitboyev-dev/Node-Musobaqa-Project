@@ -42,9 +42,23 @@ const workerSchema = new Schema({
     required: true
   },
   queue: {
-    type: [Schema.Types.ObjectId],
-    ref: "users",
-    default: []
+    type: [
+      {
+        time: {
+          type: Date,
+          required: true
+        },
+        worker: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          ref: "users"
+        }
+      }
+    ]
+  },
+  typeWork: {
+    type: String,
+    required: true
   }
 })
 
