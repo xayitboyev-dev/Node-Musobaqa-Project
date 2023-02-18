@@ -10,7 +10,8 @@ const userSchema = new Schema({
     required: true
   },
   queue: {
-    type: Array,
+    type: [Schema.Types.ObjectId],
+    ref: "workers",
     default: []
   }
 })
