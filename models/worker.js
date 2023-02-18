@@ -40,6 +40,11 @@ const workerSchema = new Schema({
   rating: {
     type: Number,
     required: true
+  },
+  queue: {
+    type: [Schema.Types.ObjectId],
+    ref: "users",
+    default: []
   }
 })
 
