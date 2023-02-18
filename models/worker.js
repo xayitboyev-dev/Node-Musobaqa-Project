@@ -9,10 +9,6 @@ const workerSchema = new Schema({
     type: String,
     required: true
   },
-  namePlace: {
-    type: String,
-    required: false
-  },
   place: {
     type: String,
     required: false
@@ -22,39 +18,30 @@ const workerSchema = new Schema({
     required: false
   },
   location: {
+    latitude: {
+      type: Number,
+      required: true
+    },
+    longitude: {
+      type: Number,
+      required: true
+    },
+  },
+  startWork: {
     type: String,
     required: true
   },
-  startWork: {
-    type: Number,
-    required: true
-  },
   endWork: {
-    type: Date,
+    type: String,
     required: true
   },
   timeToOne: {
-    type: Date,
+    type: String,
     required: true
   },
   rating: {
     type: Number,
-    required: true
-  },
-  queue: {
-    type: [
-      {
-        time: {
-          type: Date,
-          required: true
-        },
-        worker: {
-          type: Schema.Types.ObjectId,
-          required: true,
-          ref: "users"
-        }
-      }
-    ]
+    default: 0
   },
   role: {
     type: String,
@@ -63,7 +50,12 @@ const workerSchema = new Schema({
   confirmed: {
     type: Boolean,
     default: false
+  },
+  userId: {
+    type: Number,
+    required: true,
+    unique: true
   }
 });
 
-exports = model("worker", workerSchema)
+module.exports = model("worker", workerSchema)
