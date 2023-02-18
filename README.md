@@ -1,0 +1,2 @@
+# Node-Musobaqa-Project
+Najot Ta'lim musobaqa uchun!
