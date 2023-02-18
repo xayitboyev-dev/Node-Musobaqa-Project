@@ -4,6 +4,8 @@ exports.register = Markup.keyboard([
     ["👤 Ro'yxatdan o'tish"]
 ]).resize();
 
-exports.type = Markup.keyboard([
-    ["USTA", "Mijoz"]
-]);
+exports.variants = Markup.keyboard([
+    ["👷‍♂️ Usta", "👤 Mijoz"]
+]).resize()
+
+

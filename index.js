@@ -1,5 +1,6 @@
 const connect = require('./utils/mongo');
 const bot = require("./core/bot");
+require('./admin/actions/admin')
 const stage = require("./scenes/index");
 const { MONGO_URI } = require("./config/config.json");
 const auth = require("./middleware/auth");
