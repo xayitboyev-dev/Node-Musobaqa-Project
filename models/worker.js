@@ -30,11 +30,11 @@ const workerSchema = new Schema({
     required: true
   },
   endWork: {
-    type: Number,
+    type: Date,
     required: true
   },
   timeToOne: {
-    type: Number,
+    type: Date,
     required: true
   },
   rating: {
