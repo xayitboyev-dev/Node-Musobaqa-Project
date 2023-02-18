@@ -1,4 +1,4 @@
-const {Schema, model} = require("mongoose")
+const { Schema, model } = require("mongoose")
 
 const workerSchema = new Schema({
   name: {
@@ -9,7 +9,7 @@ const workerSchema = new Schema({
     type: String,
     required: true
   },
-  namePlace : {
+  namePlace: {
     type: String,
     required: false
   },

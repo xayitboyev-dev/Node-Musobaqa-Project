@@ -1,7 +1,7 @@
 const { Scenes: { Stage } } = require('telegraf');
 
 const stage = new Stage([
-    require("./register"),
+    require("./register/main"),
 ]);
 
 module.exports = stage;

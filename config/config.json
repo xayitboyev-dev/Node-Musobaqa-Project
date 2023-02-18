@@ -1,3 +1,4 @@
 {
-    "BOT_TOKEN": "5841786224:AAFxa07yxH-7-NdSxfaVqVOtQLAjNm3lKug"
+    "BOT_TOKEN": "5841786224:AAFxa07yxH-7-NdSxfaVqVOtQLAjNm3lKug",
+    "MONGO_URI": "mongodb+srv://admin:bobur@cluster0.9yzxm6h.mongodb.net/changeteam"
 }
