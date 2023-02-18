@@ -1,5 +1,6 @@
 const { Scenes: { BaseScene } } = require('telegraf');
 const scene = new BaseScene('register:main');
+
 const { register } = require('../../keyboards/button');
 
 scene.enter(async (ctx) => {
