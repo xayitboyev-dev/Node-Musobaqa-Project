@@ -13,10 +13,6 @@ scene.enter(async (ctx) => {
     };
 });
 
-scene.on("text", async (ctx) => {
-    const workers = await Worker.find({ role: ctx.message?.text });
-    const keyboard = Markup.keyboard(workers.map((item) => [`${item.name} ${item.place}`]))
-    ctx.reply(ctx.message.text + "xizmatlari: ", keyboard);
-});
+scene.on("text", async (ctx) => ctx.scene.enter("findType"));
 
 module.exports = scene;
