@@ -11,7 +11,7 @@ scene.hears("Usta", async (ctx) => {
 });
 
 scene.hears("Mijoz", async (ctx) => {
-    ctx.scene.enter("register:customer");
+    ctx.scene.enter("register:user");
 });
 
 module.exports = scene; 

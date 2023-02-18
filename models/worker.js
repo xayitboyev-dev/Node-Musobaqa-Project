@@ -13,6 +13,9 @@ const workerSchema = new Schema({
     type: String,
     required: false
   },
+  officeName: {
+    type: String,
+  },
   targetPlace: {
     type: String,
     required: false

@@ -102,18 +102,29 @@ const register = new WizardScene('register:worker',
         };
     },
     Composer.action(/cancel|confirm/gi, async (ctx) => {
-        if (ctx.match[0] === "cancel") {
-            ctx.wizard.state = {};
-            ctx.scene.enter("register:main");
-        } else if (ctx.match[0] === "confirm") {
-            try {
-                await Worker.create(ctx.wizard.state);
-                sendAdmins("#yangi_ishchi\n\n" + ctx.wizard.state.result, adminConfirmation(ctx.from.id));
+        if (ctx.wizard.state.from == "edit") {
+            if (ctx.match[0] === "cancel") {
                 ctx.deleteMessage();
+                ctx.scene.enter("main", { from: "edit" });
+            } else if (ctx.match[0] === "confirm") {
+                const worker = await Worker.findOneAndUpdate({ userId: ctx.wizard.state.userId }, ctx.wizard.state);
+                ctx.deleteMessage();
+                ctx.scene.enter("main", { from: "edit" });
+            };
+        } else {
+            if (ctx.match[0] === "cancel") {
+                ctx.wizard.state = {};
                 ctx.scene.enter("register:main");
-            } catch (error) {
-                console.log(error);
-                ctx.scene.enter("register:main");
+            } else if (ctx.match[0] === "confirm") {
+                try {
+                    await Worker.create(ctx.wizard.state);
+                    sendAdmins("#yangi_ishchi\n\n" + ctx.wizard.state.result, adminConfirmation(ctx.from.id));
+                    ctx.deleteMessage();
+                    ctx.scene.enter("register:main");
+                } catch (error) {
+                    console.log(error);
+                    ctx.scene.enter("register:main");
+                };
             };
         };
     }),

@@ -20,4 +20,14 @@ exports.location = Markup.keyboard([
     Markup.button.locationRequest("📍 Joylashuvni yuborish")
 ]).resize();
 
+exports.workerMain = Markup.keyboard([
+    ["Mijozlar", "Vaqt", "Reyting"],
+    ["Ma'lumotlarni o'zgartirish"]
+]).resize();
+
+exports.userMain = Markup.keyboard([
+    ["Xizmatlar", "Tanlangan xizmatlar"],
+    ["Malumotlarni o'zgartirish"]
+]).resize();
+
 exports.remove = Markup.removeKeyboard();

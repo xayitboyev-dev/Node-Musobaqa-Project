@@ -1,5 +1,9 @@
 const { Markup } = require("telegraf");
 
+exports.edit = (action) => Markup.inlineKeyboard([
+    [Markup.button.callback("🖊 Tahrirlash", action)],
+]).resize();
+
 exports.confirmation = Markup.inlineKeyboard([
     [Markup.button.callback("✅ Tasdiqlash", "confirm"), Markup.button.callback("❌ Bekor qilish", "cancel")],
 ]);
