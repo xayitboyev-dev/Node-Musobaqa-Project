@@ -7,7 +7,7 @@ const auth = require("./middleware/auth");
 
 // bot.use(auth);
 bot.use(stage.middleware());
-bot.use(ctx => ctx.scene.enter("register:main"));
+bot.start(ctx => ctx.scene.enter("register:main"));
 
 async function startBot() {
     try {
