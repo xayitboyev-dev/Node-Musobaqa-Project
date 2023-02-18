@@ -15,9 +15,19 @@ const userSchema = new Schema({
     required: true
   },
   queue: {
-    type: [Schema.Types.ObjectId],
-    ref: "workers",
-    default: []
+    type: [
+      {
+        time: {
+          type: Date,
+          required: true
+        },
+        worker: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          ref: "workers"
+        }
+      }
+    ]
   }
 })
 
