@@ -18,16 +18,23 @@ scene.hears("Joylashuvi", async (ctx) => {
 scene.on("location", async (ctx) => {
     const workers = JSON.parse(JSON.stringify((await Worker.find())));
     const filter = getNearest(workers, ctx.message.location);
-    console.log(filter);
+    ctx.scene.state.filterWorkers = filter;
     const keyboard = Markup.keyboard(filter.map((item) => [`${item.name} ${item.place}`]));
     ctx.reply("Masterlar: ", keyboard);
 });
 
-// scene.on("text", async (ctx) => {
-//     const workers = await Worker.find({ role: ctx.message?.text });
-//     const keyboard = Markup.keyboard(workers.map((item) => [`${item.name} ${item.place}`]))
-//     ctx.reply(ctx.message.text + "xizmatlari: ", keyboard);
-// });
+scene.on("text", async (ctx) => {
+    const worker = ctx.scene.state.filterWorkers.find((item) => `${item.name} ${item.place}` === ctx.message?.text);
+    if (worker) {
+        ctx.reply("WW" + worker.name);
+    } else {
+        ctx.reply("NOT FOUND!");
+    };
+
+    // const workers = await Worker.find({ role: ctx.message?.text });
+    // const keyboard = Markup.keyboard(workers.map((item) => [`${item.name} ${item.place}`]))
+    // ctx.reply(ctx.message.text + "xizmatlari: ", keyboard);
+});
 
 function getNearest(workers, myLoc) {
     let res = [];
