@@ -1,17 +1,17 @@
-const { Scenes: { Stage, WizardScene } } = require("telegraf");
+const { Scenes: { WizardScene } } = require("telegraf");
 
-const register = new WizardScene('register:wizard',
-    async (ctx) => {
-        ctx.reply("Ism:");
-    },
+const register = new WizardScene('register:worker',
     async (ctx) => {
         ctx.reply("Ish:");
+        ctx.wizard.next();
     },
     async (ctx) => {
         ctx.reply("Telefon:");
+        ctx.wizard.next();
     },
     async (ctx) => {
         ctx.reply("Soatlik ish:");
+        ctx.wizard.next();
     },
 );
 
