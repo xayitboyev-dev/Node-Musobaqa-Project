@@ -16,4 +16,8 @@ exports.phone = Markup.keyboard([
     Markup.button.contactRequest("📱 Raqamni yuborish")
 ]).resize();
 
+exports.location = Markup.keyboard([
+    Markup.button.locationRequest("📍 Joylashuvni yuborish")
+]).resize();
+
 exports.remove = Markup.removeKeyboard();
