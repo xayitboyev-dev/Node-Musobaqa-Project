@@ -56,10 +56,14 @@ const workerSchema = new Schema({
       }
     ]
   },
-  typeWork: {
+  role: {
     type: String,
     required: true
+  },
+  confirmed: {
+    type: Boolean,
+    default: false
   }
-})
+});
 
 exports = model("worker", workerSchema)

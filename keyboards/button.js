@@ -7,3 +7,7 @@ exports.register = Markup.keyboard([
 exports.role = Markup.keyboard([
     ["Usta", "Mijoz"]
 ]).resize();
+
+exports.skip = Markup.keyboard([
+    ["➡️ Tashlab ketish"]
+]).resize();
