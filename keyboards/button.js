@@ -12,6 +12,12 @@ exports.skip = Markup.keyboard([
     ["➡️ Tashlab ketish"]
 ]).resize();
 
+exports.findType = Markup.keyboard([
+    ["Ismi"],
+    ["Reytingi"],
+    ["Joylashuvi"],
+]).resize();
+
 exports.phone = Markup.keyboard([
     Markup.button.contactRequest("📱 Raqamni yuborish")
 ]).resize();
