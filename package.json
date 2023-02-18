@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.9.2",
+    "telegraf": "^4.11.2"
+  },
+  "name": "node-musobaqa-project",
+  "description": "Najot Ta'lim musobaqa uchun!",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xayitboyev-dev/Node-Musobaqa-Project.git"
+  },
+  "author": "Change Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xayitboyev-dev/Node-Musobaqa-Project/issues"
+  },
+  "homepage": "https://github.com/xayitboyev-dev/Node-Musobaqa-Project#readme"
+}
