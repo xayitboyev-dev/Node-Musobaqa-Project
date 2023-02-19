@@ -6,7 +6,6 @@ bot.use(session());
 // bot.telegram.setMyCommands([{ command: "/start", description: "Botni yangilash" }]);
 bot.catch((error) => {
     console.log(error);
-    process.exit(0);
 });
 
 module.exports = bot; 

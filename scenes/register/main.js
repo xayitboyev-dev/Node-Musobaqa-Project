@@ -19,7 +19,7 @@ scene.action("check", async (ctx) => {
         if (user?.confirmed) {
             ctx.answerCbQuery("✅ Tasdiqlangan, endi botdan foydalanishingiz mumkin!", { show_alert: true });
             ctx.deleteMessage();
-            ctx.scene.enter("main");
+            ctx.scene.enter("main", { from: "edit" });
         } else {
             ctx.answerCbQuery("❗️ Adminlar tasdiqlamagan, kuting.", { show_alert: true });
         };
@@ -37,6 +37,10 @@ scene.action("cancel", async (ctx) => {
     } catch (error) {
         console.log(error);
     };
+});
+
+scene.action("msgToAdmin", async (ctx) => {
+    ctx.scene.enter("sendMessage", { userId: "admin", from: ctx.from.id });
 });
 
 scene.hears("👤 Ro'yxatdan o'tish", (ctx) => ctx.scene.enter("register:role"));

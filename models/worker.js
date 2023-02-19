@@ -58,6 +58,28 @@ const workerSchema = new Schema({
     type: Number,
     required: true,
     unique: true
+  },
+  time: {
+    days: [
+      {
+        date: { type: Number, required: true },
+        times: [
+          {
+            time: {
+              type: String,
+              required: true
+            },
+            status: {
+              type: String,
+              default: "empty"
+            },
+            receiver: {
+              type: Number,
+            }
+          },
+        ]
+      }
+    ]
   }
 });
 

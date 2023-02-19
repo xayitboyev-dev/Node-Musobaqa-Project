@@ -12,9 +12,11 @@ exports.skip = Markup.keyboard([
     ["➡️ Tashlab ketish"]
 ]).resize();
 
+exports.back = Markup.keyboard([
+    ["🔙 Orqaga qaytish"]
+]).resize();
+
 exports.findType = Markup.keyboard([
-    ["Ismi"],
-    ["Reytingi"],
     ["Joylashuvi"],
 ]).resize();
 
@@ -27,7 +29,7 @@ exports.location = Markup.keyboard([
 ]).resize();
 
 exports.workerMain = Markup.keyboard([
-    ["Mijozlar", "Vaqt", "Reyting"],
+    ["Mijozlar", "Vaqt"],
     ["Ma'lumotlarni o'zgartirish"]
 ]).resize();
 
