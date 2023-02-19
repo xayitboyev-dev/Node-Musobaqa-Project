@@ -19,3 +19,8 @@ exports.adminConfirmation = (userId) => {
         [Markup.button.callback("✅ Tasdiqlash", "conf_" + userId), Markup.button.callback("❌ Bekor qilish", "canc_" + userId)],
     ]);
 };
+
+exports.workerReview = (workerId) => Markup.inlineKeyboard([
+    [Markup.button.callback("📍 Joylashuvi", "location_" + workerId), Markup.button.callback("🕝 Vaqt olish", "time_" + workerId)],
+    // [Markup.button.callback("⭐️ Baholash", "rate_" + workerId)]
+]); 

@@ -19,7 +19,7 @@ scene.action("check", async (ctx) => {
         if (user?.confirmed) {
             ctx.answerCbQuery("✅ Tasdiqlangan, endi botdan foydalanishingiz mumkin!", { show_alert: true });
             ctx.deleteMessage();
-            ctx.scene.enter("main");
+            ctx.scene.enter("main", { from: "edit" });
         } else {
             ctx.answerCbQuery("❗️ Adminlar tasdiqlamagan, kuting.", { show_alert: true });
         };

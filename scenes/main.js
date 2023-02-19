@@ -33,6 +33,10 @@ scene.hears("Malumotlarni o'zgartirish", async (ctx) => {
 
 scene.hears("Xizmatlar", (ctx) => ctx.scene.enter("services"));
 
+scene.hears("Vaqt", (ctx) => {
+    ctx.scene.enter("myTimes");
+});
+
 scene.action("workerEdit", (ctx) => {
     ctx.deleteMessage();
     ctx.scene.enter("register:worker", { from: "edit" });

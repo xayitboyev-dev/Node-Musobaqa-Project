@@ -7,6 +7,7 @@ const stage = new Stage([
     require("./register/role"),
     require("./services"),
     require("./findType"),
+    require("./myTimes"),
     require("./main")
 ]);
 
