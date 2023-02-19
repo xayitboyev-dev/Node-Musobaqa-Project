@@ -17,6 +17,7 @@ scene.on("text", (ctx) => {
         bot.telegram.sendMessage(ctx.scene.state?.userId, ctx.message?.text, replyMessage(ctx.scene.state?.from));
     };
     ctx.reply("✅ Muvaffaqiyatli yuborildi!");
+    ctx.scene.leave();
 });
 
 scene.on("message", (ctx) => {
