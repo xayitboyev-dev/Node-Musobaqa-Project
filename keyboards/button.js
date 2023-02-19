@@ -17,8 +17,6 @@ exports.back = Markup.keyboard([
 ]).resize();
 
 exports.findType = Markup.keyboard([
-    ["Ismi"],
-    ["Reytingi"],
     ["Joylashuvi"],
 ]).resize();
 

@@ -5,6 +5,7 @@ const stage = new Stage([
     require("./register/user"),
     require("./register/worker"),
     require("./register/role"),
+    require("./sendMessage"),
     require("./services"),
     require("./findType"),
     require("./myTimes"),

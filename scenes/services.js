@@ -13,6 +13,13 @@ scene.enter(async (ctx) => {
     };
 });
 
-scene.on("text", async (ctx) => ctx.scene.enter("findType"));
+scene.on("text", async (ctx) => {
+    const workers = await Worker.find({ role: ctx.message?.text });
+    if (workers.length) {
+        ctx.scene.enter("findType", { role: ctx.message?.text });
+    } else {
+        ctx.reply(ctx.message?.text + " masterlar mavjud emas!");
+    };
+});
 
 module.exports = scene;

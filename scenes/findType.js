@@ -19,7 +19,7 @@ scene.hears("Joylashuvi", async (ctx) => {
 });
 
 scene.on("location", async (ctx) => {
-    const workers = JSON.parse(JSON.stringify((await Worker.find())));
+    const workers = JSON.parse(JSON.stringify((await Worker.find({ role: ctx.scene.state.role }))));
     const filter = getNearest(workers, ctx.message.location);
     const mapped = filter.map((item) => [`${item.name} ${item.place}`])
     mapped.unshift(["🔙 Orqaga qaytish"]);
@@ -34,7 +34,7 @@ scene.hears("🔙 Orqaga qaytish", (ctx) => {
 
 scene.on("text", async (ctx) => {
     try {
-        const worker = ctx.scene.state.filterWorkers.find((item) => `${item.name} ${item.place}` === ctx.message?.text);
+        const worker = ctx.scene.state?.filterWorkers?.find((item) => `${item.name} ${item.place}` === ctx.message?.text);
         ctx.scene.state.worker = worker;
         ctx.reply(`Role: ${worker.role}\nIsm: ${worker.name}\nTelefon: ${worker.phone}${worker.officeName ? "\nIshxona nomi: " + worker.officeName : ""}\nManzil: ${worker.place}\nMo'ljal: ${worker.targetPlace}\nIshni boshlash: ${worker.startWork}\nIshni yakunlash: ${worker.endWork}\nHarbir mijoz uchun vaqt: ${worker.timeToOne}\n`, workerReview(worker.userId));
     } catch (error) {
@@ -61,7 +61,7 @@ scene.action(/^time_(.+)$/, async (ctx) => {
         };
     });
 
-    ctx.editMessageText("Qaysi kunga bo'sh qilmoqchisiz?", Markup.inlineKeyboard(days.map((item) => [Markup.button.callback(item.local, "takedate_" + item.date)])))
+    ctx.editMessageText("Qaysi kunga band qilmoqchisiz?", Markup.inlineKeyboard(days.map((item) => [Markup.button.callback(item.local, "takedate_" + item.date)])))
 });
 
 scene.action(/^takedate_(.+)$/, async (ctx) => {
@@ -77,6 +77,10 @@ scene.action(/^selecttime_(.+)$/, async (ctx) => {
         const index = worker.time.days.findIndex(item => item.date == ctx.scene.state.date);
         const times = worker.time.days[index].times;
         const timeIndex = times.findIndex(item => item._id == _id);
+        if (worker.time.days[index].times[timeIndex].status == "cancelled") {
+            ctx.answerCbQuery("Masterning vaqti yo'q!");
+            return
+        }
         if (worker.time.days[index].times[timeIndex].receiver) {
             if (worker.time.days[index].times[timeIndex].receiver == ctx.from.id) {
                 worker.time.days[index].times[timeIndex].receiver = null;

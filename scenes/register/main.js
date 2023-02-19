@@ -39,6 +39,10 @@ scene.action("cancel", async (ctx) => {
     };
 });
 
+scene.action("msgToAdmin", async (ctx) => {
+    ctx.scene.enter("sendMessage", { userId: "admin", from: ctx.from.id });
+});
+
 scene.hears("👤 Ro'yxatdan o'tish", (ctx) => ctx.scene.enter("register:role"));
 
 module.exports = scene;
